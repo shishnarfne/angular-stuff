@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+body {background-color:white;}
+p:nth-child(even){background-color:angelblue;}
+p:nth-child(odd){background-color:lightgrey;}
+p {background-color:white;font: 12px arial;padding: 10px;width:30%}
+#output {width:40%; font: 12px arial; position: absolute;top: 100px;left:20px; border:1px solid orange;  background-color:white; padding:20px;}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+<p>Today's welcome message is:</p>
+{{titles}}
+
+<!--
+<p ng-repeat="x in titles track by $index">{{x}}</p>
+-->
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope, $http) {
+
+
+
+  $http.get("http://libris.kb.se/")
+  .then(function(response) {
+    $scope.titles = response.statusText
+
+	//$scope.titles =  checkRecords(response.data)  //$scope.d.substr(1020,100)
+
+
+
+  });
+
+ function checkRecords(x){
+
+ var    parser = new DOMParser();
+ var  xmlDoc = parser.parseFromString(x,"text/html");
+
+
+
+ var tit = xmlDoc.getElementsByTagName('Teaser-heading');
+
+ var str = [];
+ for (var i = 0; i < tit.length; i++)  {
+ str[i] = tit[i].textContent;
+	}
+ return str;
+}
+
+});
+</script>
+
+
+
+</body>
+
+
+</html>
