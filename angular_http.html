@@ -30,7 +30,7 @@ app.controller('myCtrl', function($scope, $http) {
 
 
 
-  $http.get("http://libris.kb.se/")
+  $http.get("https://www.dn.se/")
   .then(function(response) {
     $scope.titles = response.statusText
 
@@ -47,7 +47,7 @@ app.controller('myCtrl', function($scope, $http) {
 
 
 
- var tit = xmlDoc.getElementsByTagName('Teaser-heading');
+ var tit = xmlDoc.getElementsByTagName('a');
 
  var str = [];
  for (var i = 0; i < tit.length; i++)  {
@@ -58,7 +58,6 @@ app.controller('myCtrl', function($scope, $http) {
 
 });
 </script>
-
 
 
 </body>
